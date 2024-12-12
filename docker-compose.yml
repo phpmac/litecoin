@@ -1,0 +1,24 @@
+# version: "3.8"
+
+services:
+  litecoin:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: litecoin-node
+    volumes:
+      - litecoin-data:/root/.litecoin
+    ports:
+      - "9333:9333" # P2P 端口
+      - "9332:9332" # RPC 端口
+    restart: unless-stopped
+    environment:
+      - LITECOIN_DATA=/root/.litecoin
+    command:
+      - litecoind
+      - -printtoconsole
+      - -rpcallowip=0.0.0.0/0
+      - -rpcbind=0.0.0.0
+
+volumes:
+  litecoin-data:

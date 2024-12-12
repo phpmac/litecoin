@@ -36,7 +36,7 @@ WORKDIR /litecoin
 RUN git clone git@github.com:phpmac/litecoin.git . && \
     ./contrib/install_db4.sh `pwd` && \
     ./autogen.sh && \
-    ./configure --disable-wallet --without-gui --without-miniupnpc && \
+    ./configure --with-wallet --with-incompatible-bdb && \
     make && \
     make install
 
